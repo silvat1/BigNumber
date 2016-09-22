@@ -1,0 +1,37 @@
+import java.util.LinkedList;
+
+public class BigNumber {
+	private LinkedList<Integer> holster;
+
+	public BigNumber(String numberAsString) {
+		holster = new LinkedList<Integer>();
+		loadNumber(numberAsString);
+	}
+
+	public BigNumber(LinkedList<Integer> number) {
+		holster = number;
+	}
+
+	private void loadNumber(String numberAsString) {
+		int currentNum;
+		boolean start = false;
+		for (int i = numberAsString.length() - 1; i > -1; i--) {
+			currentNum = Character.getNumericValue(numberAsString.charAt(i));
+			if (currentNum == 0 && start == false) {
+				holster.push(currentNum);
+			} else {
+				if (start == false) {
+					holster.push(10 - currentNum);
+					start = true;
+				} else {
+					holster.push(9 - currentNum);
+				}
+			}
+		}
+		holster.push(0);
+	}
+
+	public LinkedList<Integer> getHolster() {
+		return holster;
+	}
+}
