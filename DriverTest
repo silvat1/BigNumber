@@ -1,0 +1,162 @@
+import java.util.LinkedList;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		//Test Regular (positive) loading, toString, and check positive sign
+		BigNumber test = new BigNumber("1213154689794951654");
+		LinkedList<Integer> list = test.getHolster();
+
+		for(int temp: list){
+			System.out.print(temp);
+		}
+		System.out.println();
+		System.out.println(test.toString());
+		System.out.println(test.sign());
+		
+		//Test negate, negative toString, and check negative sign
+		BigNumber testNegate = test.negate();
+		LinkedList<Integer> listNeg = test.getHolster();
+		listNeg = testNegate.getHolster();
+		for(int temp: listNeg){
+			System.out.print(temp);
+		}
+		System.out.println();
+		System.out.println(testNegate.toString());
+		System.out.println(testNegate.sign());
+		
+		//Test Equals
+		BigNumber testEq1 = new BigNumber("1213154689794951654");
+		BigNumber testEq2 = new BigNumber("1213154689794951654");
+		BigNumber testEq3 = new BigNumber("1213154689794851654");
+		System.out.println(testEq1.equals(testEq2.negate().negate()));
+		System.out.println(testEq2.equals(testEq3));
+		
+		//Test normalize
+		BigNumber testNormalize = new BigNumber("000001101234567890");
+		System.out.println(testNormalize.toString());
+		testNormalize.normalize();
+		for(int temp: testNormalize.getHolster()){
+			System.out.print(temp);
+		}
+		System.out.println();
+		System.out.println(testNormalize.toString());
+		
+		BigNumber negateNormalize = new BigNumber("00001").negate();
+		for(int temp: negateNormalize.getHolster()){
+			System.out.print(temp);
+		}
+		System.out.println();
+		negateNormalize.normalize();
+		for(int temp: negateNormalize.getHolster()){
+			System.out.print(temp);
+		}
+		System.out.println();
+		System.out.println(negateNormalize.toString());
+
+		//Test compareTo
+		BigNumber one = new BigNumber("000653");
+		BigNumber two = new BigNumber("000653");
+		System.out.println(one.compareTo(two));
+		one = new BigNumber("000654");
+		two = new BigNumber("000653");
+		System.out.println(one.compareTo(two));
+		one = new BigNumber("000654").negate();
+		two = new BigNumber("000653");
+		System.out.println(one.compareTo(two));
+		one = new BigNumber("000654").negate();
+		two = new BigNumber("000653").negate();
+		System.out.println(one.compareTo(two));
+		
+		
+		//Test Addition
+		BigNumber addA = new BigNumber("0005893");
+		BigNumber addB = new BigNumber("0003950");
+		System.out.println(addA.add(addB));
+		addA = new BigNumber("020039035");
+		addB = new BigNumber("082589003");
+		System.out.println(addA.add(addB));
+		addA = new BigNumber("000000003052690");
+		addB = new BigNumber("000000003859309");
+		System.out.println(addA.add(addB));
+		addA = new BigNumber("20039035");
+		addB = new BigNumber("82589003");
+		System.out.println(addA.add(addB));
+		addA = new BigNumber("245");
+		addB = new BigNumber("175").negate();
+		System.out.println(addA.add(addB));
+		
+		//Test Subtraction
+		BigNumber subA = new BigNumber("000280090");
+		BigNumber subB = new BigNumber("000280090");
+		System.out.println(subA.subtract(subB));
+		subA = new BigNumber("0007650008990");
+		subB = new BigNumber("0001284790279");
+		System.out.println(subA.subtract(subB));
+		subA = new BigNumber("7000020000490");
+		subB = new BigNumber("0000000000001");
+		System.out.println(subA.subtract(subB));
+		
+		subA = new BigNumber("000654");
+		subB = new BigNumber("000653").negate();
+		System.out.println(subA.toString());
+		System.out.println(subB.toString());
+		System.out.println(subA.compareTo(subB));
+		System.out.println(subA.subtract(subB));
+		
+		//A+B    
+		addA = new BigNumber("0009");
+		addB = new BigNumber("0002");
+		System.out.println(addA.add(addB));
+		
+		//A-(-B)    
+		addA = new BigNumber("0009");
+		addB = new BigNumber("0002").negate();
+		System.out.println(addA.subtract(addB));
+		
+		//A-B    
+		addA = new BigNumber("0009");
+		addB = new BigNumber("0002");
+		System.out.println(addA.subtract(addB));
+		
+		//A+(-B)    
+		addA = new BigNumber("0009");
+		addB = new BigNumber("0002").negate();
+		System.out.println(addA.add(addB));
+		
+		//-A+B    
+		addA = new BigNumber("0009").negate();
+		addB = new BigNumber("0002");
+		System.out.println(addA.add(addB));
+		
+		//-A-B      
+		addA = new BigNumber("0009").negate();
+		addB = new BigNumber("0002");
+		System.out.println(addA.subtract(addB));
+		
+		//-A+(-B)     
+		addA = new BigNumber("0009").negate();
+		addB = new BigNumber("0002").negate();
+		System.out.println(addA.add(addB));
+		
+		//-A-(-B)      
+		addA = new BigNumber("0009").negate();
+		addB = new BigNumber("0002").negate();
+		System.out.println(addA.subtract(addB));
+		
+		
+		
+//		//Test Division
+//		BigNumber div1 = new BigNumber("00000029860");
+//		BigNumber div2 = new BigNumber("00000000100");
+//		System.out.println(div1.divide(div2));
+		//***Commented out temporarily due to slow runtime
+		//div1 = new BigNumber("59210295");
+		//div2 = new BigNumber("00000005");
+		//System.out.println(div1.divide(div2));
+		//div1 = new BigNumber("32095830292");   
+		//div2 = new BigNumber("00000000002");	 
+		//System.out.println(div1.divide(div2));
+
+	}
+}
