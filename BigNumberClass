@@ -21,13 +21,19 @@ public class BigNumber {
 	// LinkedList
 	private void loadNumber(String numberAsString) {
 		int currentNum;
-
-		for (int i = numberAsString.length() - 1; i > -1; i--) {
+		boolean negative = false;
+		int stop = -1;
+		if (numberAsString.charAt(0) == '-') {
+			negative = true;
+			stop++;
+		}
+		for (int i = numberAsString.length() - 1; i > stop; i--) {
 			currentNum = Character.getNumericValue(numberAsString.charAt(i));
 			holster.push(currentNum);
 		}
-		if (holster.peek() < 5 || getSize() == 1)
-			holster.push(0);
+		holster.push(0);
+		if (negative)
+			holster = this.negate().getHolster();
 	}
 
 	// Returns the LinkedList used to store BigNumber
@@ -131,7 +137,6 @@ public class BigNumber {
 		}
 
 	}
-
 	// TODO Normalize when a new BigNumber is created (i.e. from arithmetic)
 	// Use normalize before arithmetic to reduce operations; eliminate excessive
 	// leading 0/9s
