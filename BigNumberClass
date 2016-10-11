@@ -399,7 +399,6 @@ public class BigNumber {
 		}
 		while (itr.hasNext()) {
 			message = message + itr.next();
-			System.out.println("message: " + message);
 		}
 		return message;
 	}
